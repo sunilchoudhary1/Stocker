@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="css/register.css" />
   </head>
   <body>
-   
-
     <!-- Main Content -->
     <div class="container">
       <h1>STOCKER</h1>
@@ -61,16 +59,67 @@
     </div>
 
     <script>
-      function validateForm() {
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm-password").value;
 
-        if (password !== confirmPassword) {
-          alert("Passwords do not match!");
-          return false;
-        }
-        return true;
-      }
+function validateForm() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return false;
+    }
+    return true;
+
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("form").addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword = document.getElementById("confirm-password").value;
+
+          // Check if passwords match
+          if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          const userData = {
+            username: username,
+            email: email,
+            password: password
+          };
+
+          try {
+            // Adjust this URL to match your Spring Boot backend endpoint
+            const response = await fetch("http://localhost:8080/api/users/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                // Add CSRF token if needed (only if CSRF protection is enabled)
+                // "X-CSRF-TOKEN": csrfToken 
+              },
+              body: JSON.stringify(userData)
+            });
+
+            const result = await response.json(); // Parse response as JSON
+
+            if (response.ok) {
+              alert("Registration successful!");
+              window.location.href = "login.html"; // Redirect to login page
+            } else {
+              alert("Error: " + result.message || "An error occurred.");
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred while registering.");
+          }
+        });
+      });
+    }
     </script>
   </body>
 </html>
