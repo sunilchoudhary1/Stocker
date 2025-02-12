@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+   
+
+    <!-- Main Content -->
+    <div class="container">
+      <h1>STOCKER</h1>
+      <form action="/register" method="POST" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Create your username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm_password"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Register</button>
+      </form>
+      <div class="footer">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+    </div>
+
+    <script>
+      function validateForm() {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match!");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

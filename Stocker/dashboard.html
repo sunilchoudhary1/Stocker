@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Sphere - Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css"> <!-- Linking the CSS file -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">📊 Stock Sphere</div>
+        <ul class="nav-links">
+            <li><a href="#"><b>Dashboard</b></a></li>
+            <li><a href="#"><b>Market Insights</b></a></li>
+            <li><a href="#"><b>My Portfolio</b></a></li>
+            <li><a href="#"><b>Watchlist</b></a></li>
+            <li><a href="#"><b>Account Settings</b></a></li>
+            <li><a href="#" class="logout"><b>Logout</b> 🚪</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sidebar (Tools) -->
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Tools 🛠️</h3>
+            <ul>
+                <li><a href="#">Stock Screener</a></li>
+                <li><a href="#">Investment Calculator</a></li>
+                <li><a href="#">Risk Analysis Tool</a></li>
+                <li><a href="#" id="stockAnalysisLink">Stock Analysis Tool 📈</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="dashboard">
+            <h1>Welcome back, [User’s Name]! 📈</h1>
+
+            <!-- Key Metrics -->
+            <div class="metrics">
+                <div class="card"><h2>Total Investment</h2><p>$50,000</p></div>
+                <div class="card"><h2>Portfolio Value</h2><p>$55,800</p></div>
+                <div class="card"><h2>Daily Gains/Losses</h2><p>+ $300</p></div>
+            </div>
+
+            <!-- Live Stock Ticker -->
+            <div class="stock-ticker">
+                <marquee behavior="scroll" direction="left">AAPL: $172.50 ▲ 1.2% | TSLA: $765.00 ▼ 0.8% | AMZN: $3,200 ▲ 0.5%</marquee>
+            </div>
+
+            <!-- Data Visualization Section -->
+            <section class="charts">
+                <h2>Portfolio Performance 📊</h2>
+                <div class="chart-placeholder">[Insert Chart Here]</div>
+            </section>
+
+            <!-- News Feed -->
+            <section class="news-feed">
+                <h2>Latest Market News 📰</h2>
+                <ul id="newsList">
+                    <li><a href="#">Tech stocks surge amid global recovery trends</a></li>
+                    <li><a href="#">Tesla announces new battery technology</a></li>
+                    <li><a href="#">Federal Reserve hints at interest rate hikes</a></li>
+                </ul>
+            </section>
+
+            <!-- Quick Trade Panel -->
+            <section class="quick-trade">
+                <h2>Quick Trade 💼</h2>
+                <form>
+                    <input type="text" placeholder="Enter Stock Symbol" required>
+                    <input type="number" placeholder="Quantity" required>
+                    <button type="submit">Buy</button>
+                    <button type="submit" class="sell-btn">Sell</button>
+                </form>
+            </section>
+
+            <!-- Stock Analysis Section -->
+            <section class="stock-analysis" id="stockAnalysisSection" style="display: none;">
+                <h2>📊 Stock Analysis Tool</h2>
+                <form id="stockSearchForm">
+                    <input type="text" id="stockSymbol" placeholder="Enter Stock Symbol (e.g., AAPL)" required>
+                    <button type="submit">Analyze Stock</button>
+                </form>
+
+                <div class="stock-result" style="display: none;">
+                    <canvas id="stockChart"></canvas>
+                    <div class="analysis-summary" id="analysisSummary"></div>
+
+                    <!-- Additional Analysis Sections -->
+                    <div id="advancedAnalysis" style="margin-top: 20px;">
+                        <h3>2. 📈 Price Prediction (Forecasting)</h3>
+                        <p id="pricePrediction"></p>
+
+                        <h3>3. 🔍 Technical Analysis Insights</h3>
+                        <p id="technicalInsights"></p>
+
+                        <h3>4. 💼 Fundamental Analysis</h3>
+                        <p id="fundamentalAnalysis"></p>
+
+                        <h3>5. 📰 News & Events Impact</h3>
+                        <p id="newsImpact"></p>
+
+                        <h3>6. 💸 Dividend Information</h3>
+                        <p id="dividendInfo"></p>
+
+                        <h3>7. ⚠️ Risk Assessment</h3>
+                        <p id="riskAssessment"></p>
+
+                        <h3>8. 🔊 Volume Analysis</h3>
+                        <p id="volumeAnalysis"></p>
+
+                        <h3>9. 🗣️ Sentiment Analysis</h3>
+                        <p id="sentimentAnalysis"></p>
+
+                        <h3>10. 📊 Portfolio Impact</h3>
+                        <p id="portfolioImpact"></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Load the date adapter -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

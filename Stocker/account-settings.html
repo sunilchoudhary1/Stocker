@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Stocker</title>
+    <link rel="stylesheet" href="css/account-settings.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Stocker ⚡</div>
+        <div class="nav-items">
+            <a href="#">Dashboard</a>
+            <a href="#">My Portfolio</a>
+            <a href="#">Notifications</a>
+            <a href="#" class="active">Account Settings</a>
+        </div>
+    </nav>
+
+    <!-- Account Settings Container -->
+    <div class="settings-container">
+        <h1>⚙️ Account Settings</h1>
+
+        <!-- Personal Information Section -->
+        <section class="settings-section">
+            <h2>👤 Personal Information</h2>
+            <form id="personalInfoForm">
+                <label>Full Name:</label>
+                <input type="text" placeholder="John Doe" required>
+
+                <label>Email Address:</label>
+                <input type="email" placeholder="john@example.com" required>
+
+                <label>Phone Number:</label>
+                <input type="tel" placeholder="+91 9876543210" required>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+
+        <!-- Password Change Section -->
+        <section class="settings-section">
+            <h2>🔑 Change Password</h2>
+            <form id="passwordForm">
+                <label>Current Password:</label>
+                <input type="password" required>
+
+                <label>New Password:</label>
+                <input type="password" required>
+
+                <label>Confirm New Password:</label>
+                <input type="password" required>
+
+                <button type="submit">Update Password</button>
+            </form>
+        </section>
+
+        <!-- Notification Preferences -->
+        <section class="settings-section">
+            <h2>🔔 Notification Preferences</h2>
+            <label><input type="checkbox" checked> Stock Price Alerts</label>
+            <label><input type="checkbox" checked> Market News Updates</label>
+            <label><input type="checkbox"> Weekly Performance Reports</label>
+        </section>
+
+        <!-- Account Deletion Section -->
+        <section class="danger-zone">
+            <h2>⚠️ Danger Zone</h2>
+            <p>Deleting your account is irreversible. All your data will be lost.</p>
+            <button class="delete-btn" onclick="confirmDeletion()">Delete Account</button>
+        </section>
+    </div>
+
+    <script src="account-settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - Stocker</title>
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Stocker 📈</div>
+        <div class="nav-items">
+            <a href="#">Dashboard</a>
+            <a href="#">My Portfolio</a>
+            <div class="notification-icon" onclick="toggleNotifications()">
+                🔔 <span class="badge" id="notifCount">3</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notifPanel">
+        <h3>🔔 Notifications</h3>
+        <ul id="notificationList">
+            <li>📈 Your stock ABC hit the target price!</li>
+            <li>💼 Portfolio increased by 5% today!</li>
+            <li>⚠️ Market volatility alert for XYZ.</li>
+        </ul>
+    </div>
+
+    <script src="notifications.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <style>
+      /* Styling for the top bar */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f5f5f5;
+        padding: 10px 20px;
+        font-size: 14px;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .topbar .left {
+        display: flex;
+        gap: 15px;
+      }
+
+      .topbar span i,
+      .topbar a i {
+        color: #00d084; /* Set icons to green */
+        margin-right: 5px;
+      }
+
+      .topbar .right a {
+        margin-left: 15px;
+        text-decoration: none;
+        color: #007bff;
+      }
+
+      .topbar .right a:hover {
+        text-decoration: underline;
+      }
+
+      /* Profile Page Styles */
+      .profile-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .profile-header h1 {
+        font-size: 24px;
+        color: #333;
+      }
+
+      .edit-btn {
+        padding: 10px 15px;
+        background-color: #00d084;
+        color: white;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .edit-btn:hover {
+        background-color: #00a665;
+      }
+
+      .profile-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+      }
+
+      .profile-picture {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .profile-picture img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #00d084;
+      }
+
+      .profile-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .profile-details span {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .profile-details span strong {
+        color: #333;
+      }
+
+      .sections {
+        margin-top: 30px;
+      }
+
+      .sections h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .sections ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .sections ul li {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .sections ul li:hover {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="left">
+        <span><i>📞</i> +1-234-567-890</span>
+        <span><i>📧</i> support@stocksphere.com</span>
+      </div>
+      <div class="right">
+        <a href="/login"><i>🔒</i> Login</a>
+        <a href="/register"><i>👤</i> Register</a>
+      </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+      <div class="profile-header">
+        <h1>My Profile</h1>
+        <button class="edit-btn">Edit Profile</button>
+      </div>
+      <div class="profile-info">
+        <!-- Profile Picture -->
+        <div class="profile-picture">
+          <img
+            src="https://via.placeholder.com/120"
+            alt="Profile Picture"
+          />
+        </div>
+        <!-- Profile Details -->
+        <div class="profile-details">
+          <span><strong>Name:</strong> John Doe</span>
+          <span><strong>Email:</strong> johndoe@example.com</span>
+          <span><strong>Phone:</strong> +1-123-456-7890</span>
+          <span><strong>Joined:</strong> January 1, 2024</span>
+        </div>
+      </div>
+
+      <!-- Additional Sections -->
+      <div class="sections">
+        <h2>Account Options</h2>
+        <ul>
+          <li>Change Password</li>
+          <li>Update Contact Information</li>
+          <li>View Transaction History</li>
+          <li>Deactivate Account</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

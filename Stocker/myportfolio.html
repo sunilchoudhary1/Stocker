@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio - Stock Sphere</title>
+    <link rel="stylesheet" href="css/my-portfolio.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">📊 Stock Sphere</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="market-insights.html">Market Insights</a></li>
+            <li><a href="my-portfolio.html" class="active">My Portfolio</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+            <li><a href="account-settings.html">Account Settings</a></li>
+            <li><a href="logout.html" class="logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Quick Tools</h3>
+            <ul>
+                <li><a href="#">Stock Screener</a></li>
+                <li><a href="#">Investment Calculator</a></li>
+                <li><a href="#">Risk Analysis Tool</a></li>
+            </ul>
+        </aside>
+
+        <!-- Portfolio Section -->
+        <main class="portfolio">
+            <h1>📈 My Portfolio</h1>
+
+            <!-- Portfolio Summary Cards -->
+            <div class="summary-cards">
+                <div class="card">
+                    <h2>Total Investment</h2>
+                    <p>$25,000</p>
+                </div>
+                <div class="card">
+                    <h2>Current Value</h2>
+                    <p>$28,500</p>
+                </div>
+                <div class="card">
+                    <h2>Profit/Loss</h2>
+                    <p style="color: green;">+ $3,500</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Table -->
+            <section class="portfolio-table">
+                <h2>Stock Holdings</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Quantity</th>
+                            <th>Buy Price</th>
+                            <th>Current Price</th>
+                            <th>Profit/Loss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Apple (AAPL)</td>
+                            <td>50</td>
+                            <td>$150</td>
+                            <td>$175</td>
+                            <td style="color: green;">+ $1,250</td>
+                        </tr>
+                        <tr>
+                            <td>Google (GOOGL)</td>
+                            <td>30</td>
+                            <td>$2,500</td>
+                            <td>$2,450</td>
+                            <td style="color: red;">- $1,500</td>
+                        </tr>
+                        <tr>
+                            <td>Amazon (AMZN)</td>
+                            <td>20</td>
+                            <td>$3,000</td>
+                            <td>$3,200</td>
+                            <td style="color: green;">+ $4,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
