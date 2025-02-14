@@ -1,0 +1,207 @@
+/* ======================== */
+/*        General Reset     */
+/* ======================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ======================== */
+/*        Light Theme       */
+/* ======================== */
+body {
+    background-color: #f4f4f4;  /* Light gray background */
+    color: #333333;            /* Dark gray text */
+    line-height: 1.6;
+}
+
+/* ======================== */
+/*      Navigation Bar      */
+/* ======================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 22px;
+    color: #00d084;  /* Greenish color */
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #333333;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: #00d084;
+    color: #ffffff;
+}
+
+.logout {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* ======================== */
+/*   Stock Analysis Tool    */
+/* ======================== */
+.analysis-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+.analysis-container h1 {
+    color: #00d084;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Form Styling */
+#stockSearchForm {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;  /* Responsive layout */
+}
+
+#stockSymbol {
+    padding: 12px 15px;
+    width: 250px;
+    border: 2px solid #00d084;
+    border-radius: 5px;
+    outline: none;
+    transition: box-shadow 0.3s;
+    font-size: 14px;
+}
+
+#stockSymbol:focus {
+    box-shadow: 0 0 8px rgba(0, 208, 132, 0.7);
+}
+
+/* Submit Button */
+button[type="submit"] {
+    background-color: #00d084;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #00b374;
+    transform: scale(1.05);
+}
+
+/* ======================== */
+/*     Results Section      */
+/* ======================== */
+.stock-result {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 2px dashed #00d084;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Chart Styling */
+#stockChart {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Analysis Summary */
+.analysis-summary {
+    text-align: left;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Highlight Gains and Losses */
+.analysis-summary .gain {
+    color: #00b374;
+    font-weight: bold;
+}
+
+.analysis-summary .loss {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* ======================== */
+/*        Animations        */
+/* ======================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================== */
+/*        Responsive        */
+/* ======================== */
+@media (max-width: 768px) {
+    .analysis-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    #stockSymbol {
+        width: 100%;
+    }
+
+    #stockSearchForm {
+        flex-direction: column;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+}

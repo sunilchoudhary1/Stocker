@@ -14,6 +14,7 @@
 body {
     background-color: #f4f4f4;  /* Light gray background */
     color: #333333;            /* Dark gray text for readability */
+    line-height: 1.6;
 }
 
 /* ======================== */
@@ -21,18 +22,18 @@ body {
 /* ======================== */
 .navbar {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;   /* White background */
+    background-color: #ffffff;
     padding: 15px 30px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    font-size: 20px;
+    font-size: 22px;
     color: #00d084;  /* Greenish color */
     font-weight: bold;
 }
@@ -43,18 +44,27 @@ body {
     gap: 20px;
 }
 
-.nav-links a {
-    color: #333333;  /* Dark text for better contrast */
-    text-decoration: none;
-    transition: color 0.3s;
+.nav-links li {
+    display: inline;
 }
 
-.nav-links a:hover {
-    color: #00d084;  /* Hover effect with green */
+.nav-links a {
+    color: #333333;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: #00d084;
+    color: #ffffff;
 }
 
 .logout {
-    color: #ff4d4d;  /* Red for logout button */
+    color: #ff4d4d;
+    font-weight: bold;
 }
 
 /* ======================== */
@@ -63,24 +73,29 @@ body {
 .container {
     display: flex;
     margin: 20px;
+    gap: 20px;
+    flex-wrap: wrap;  /* For responsiveness */
 }
 
 /* Sidebar */
 .sidebar {
-    background-color: #ffffff;   /* White background */
+    background-color: #ffffff;
     padding: 20px;
-    width: 200px;
+    width: 220px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Light shadow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .sidebar h3 {
     margin-bottom: 15px;
     color: #00d084;
+    font-size: 18px;
 }
 
 .sidebar ul {
     list-style: none;
+    padding-left: 0;
 }
 
 .sidebar a {
@@ -88,50 +103,66 @@ body {
     text-decoration: none;
     display: block;
     margin: 10px 0;
-    transition: color 0.3s;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .sidebar a:hover {
-    color: #00d084;
+    background-color: #00d084;
+    color: #ffffff;
 }
 
 /* Dashboard Main Content */
 .dashboard {
     flex: 1;
     padding: 20px;
-    margin-left: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Welcome Message */
 .dashboard h1 {
     margin-bottom: 20px;
     color: #00d084;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 /* Metrics Cards */
 .metrics {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;  /* Adjust for small screens */
     margin-bottom: 20px;
 }
 
 .card {
-    background-color: #ffffff;   /* White cards */
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     flex: 1;
+    min-width: 250px;  /* Better for responsive layouts */
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card h2 {
     color: #00d084;
     margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .card p {
     font-size: 24px;
     font-weight: bold;
+    color: #333333;
 }
 
 /* ======================== */
@@ -139,161 +170,42 @@ body {
 /* ======================== */
 .stock-ticker {
     background-color: #00d084;
-    color: #ffffff;  /* White text on green */
+    color: #ffffff;
     padding: 10px;
-    margin: 20px 0;
     border-radius: 4px;
     font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-/* ======================== */
-/*    Charts & Analysis     */
-/* ======================== */
-.charts, .news-feed, .quick-trade, .stock-analysis {
-    background-color: #ffffff;  /* Light background for sections */
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Chart Placeholder */
-.chart-placeholder {
-    background-color: #e9e9e9;  /* Light gray placeholder */
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #777;               /* Lighter gray text */
-    border: 2px dashed #ccc;   /* Soft border */
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-/* ======================== */
-/*        News Feed         */
-/* ======================== */
-.news-feed ul {
-    list-style: none;
-    padding: 0;
-}
-
-.news-feed li {
-    margin-bottom: 10px;
-}
-
-.news-feed a {
-    color: #333333;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.news-feed a:hover {
-    color: #00d084;
-}
-
-/* ======================== */
-/*    Quick Trade Panel     */
-/* ======================== */
-.quick-trade form {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.quick-trade input {
-    padding: 10px;
-    width: calc(50% - 10px);
-    background-color: #f9f9f9;  /* Light gray input background */
-    border: 1px solid #ccc;     /* Light border */
-    border-radius: 4px;
-    color: #333333;
-}
-
-.quick-trade button {
-    padding: 10px 20px;
-    background-color: #00d084;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.quick-trade .sell-btn {
-    background-color: #ff4d4d;
-}
-
-.quick-trade button:hover {
-    opacity: 0.85;
-}
-
-/* ======================== */
-/*  Stock Analysis Section  */
-/* ======================== */
-.stock-analysis {
-    display: none;  /* Hidden by default */
-    animation: fadeIn 0.5s ease-in-out;  /* Smooth fade-in effect */
-}
-
-.stock-analysis h2 {
-    color: #00d084;
-    margin-bottom: 15px;
-}
-
-#stockSearchForm {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-#stockSearchForm input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    color: #333333;
-    flex: 1;
-}
-
-#stockSearchForm button {
-    padding: 10px 20px;
-    background-color: #00d084;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-#stockSearchForm button:hover {
-    background-color: #008e6b;
-}
-
-/* Analysis Result */
-.stock-result {
-    margin-top: 20px;
-    background-color: #e8f9f4;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 5px solid #00d084;
-    display: none;
-    animation: slideIn 0.4s ease-in-out;
-}
-
-.stock-result p {
+marquee {
     font-size: 16px;
-    margin-bottom: 10px;
-    line-height: 1.6;
+    letter-spacing: 0.5px;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+/* ======================== */
+/*        Responsive        */
+/* ======================== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
 
-@keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .metrics {
+        flex-direction: column;
+    }
+
+    .card {
+        min-width: 100%;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 }
