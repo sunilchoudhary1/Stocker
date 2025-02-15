@@ -205,3 +205,37 @@ button[type="submit"]:hover {
         width: 100%;
     }
 }
+
+.stock-chart-container {
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.stock-chart-container {
+  max-width: 90%;
+  margin: auto;
+  overflow-x: auto;
+}
+
+.stock-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+

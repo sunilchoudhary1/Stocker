@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Sphere - Stock Analysis</title>
-    <link rel="stylesheet" href="css/stock-analysis.css"> <!-- New CSS file for styling -->
+    <link rel="stylesheet" href="css/stock-analysis.css" />
+
+    <!-- ✅ Required Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> <!-- TensorFlow.js -->
+
+  </head>
+  <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">📊 Stock Sphere</div>
-        <ul class="nav-links">
-            <li><a href="dashboard.html"><b>Dashboard</b></a></li> <!-- Back to Dashboard -->
-            <li><a href="#" class="logout"><b>Logout</b> 🚪</a></li>
-        </ul>
+      <div class="logo">📊 Stock Sphere</div>
+      <ul class="nav-links">
+        <li>
+          <a href="dashboard.html"><b>Dashboard</b></a>
+        </li>
+        <li>
+          <a href="#" class="logout"><b>Logout</b> 🚪</a>
+        </li>
+      </ul>
     </nav>
 
     <!-- Stock Analysis Tool -->
     <main class="analysis-container">
-        <h1>📈 Stock Analysis Tool</h1>
-        <form id="stockSearchForm">
-            <input type="text" id="stockSymbol" placeholder="Enter Stock Symbol (e.g., AAPL)" required>
-            <button type="submit">Analyze Stock</button>
-        </form>
+      <h1>📈 Stock Analysis Tool</h1>
+      <form id="stockSearchForm">
+        <input
+          type="text"
+          id="stockSymbol"
+          placeholder="Enter Stock Symbol (e.g., AAPL)"
+          required
+        />
+        <button type="submit">Analyze Stock</button>
+      </form>
 
-        <!-- Results Section -->
-        <div class="stock-result" style="display: none;">
-            <canvas id="stockChart"></canvas>
-            <div class="analysis-summary" id="analysisSummary"></div>
+      <!-- Results Section -->
+      <div class="stock-result" style="display: none">
+        <h2>Stock Analysis Result</h2>
+        <div class="stock-chart-container">
+          <canvas id="stockChart" width="800" height="400"></canvas>
         </div>
+       <div class="analysis-summary" id="analysisSummary">
+    <h3>Predicted Next Price: <span id="predictedPrice">Waiting for prediction...</span></h3>
+</div>
+
+
+      </div>
     </main>
 
-    <!-- Custom JavaScript for Stock Analysis -->
-    <script src="js/stock-analysis.js"></script>
-</body>
+    <!-- ✅ Custom JavaScript (Deferred for Performance) -->
+    <script src="js/stock-analysis.js" defer></script>
+  </body>
 </html>
