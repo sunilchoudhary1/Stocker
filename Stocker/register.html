@@ -18,14 +18,17 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          <small id="emailError" class="error-message"></small>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          <small id="passwordError" class="error-message"></small>
         </div>
         <div class="form-group">
           <label for="confirm-password">Confirm Password</label>
           <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm your password" required />
+          <small id="confirmPasswordError" class="error-message"></small>
         </div>
         <button type="submit" class="btn">Register</button>
       </form>
@@ -37,32 +40,49 @@
     <script>
       document.getElementById("registerForm").addEventListener("submit", async function (event) {
           event.preventDefault();
-      
+
+          // Get input values
           const username = document.getElementById("username").value.trim();
           const email = document.getElementById("email").value.trim();
           const password = document.getElementById("password").value;
           const confirmPassword = document.getElementById("confirm-password").value;
-      
-          if (password !== confirmPassword) {
-              alert("Passwords do not match!");
+
+          // Clear previous error messages
+          document.getElementById("emailError").textContent = "";
+          document.getElementById("passwordError").textContent = "";
+          document.getElementById("confirmPasswordError").textContent = "";
+
+          // Email Validation
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          if (!emailRegex.test(email)) {
+              document.getElementById("emailError").textContent = "Enter a valid email address.";
               return;
           }
-      
-          const requestData = {
-              username: username,
-              email: email,
-              password: password
-          };
-      
+
+          // Password Strength Validation
+          const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!passwordRegex.test(password)) {
+              document.getElementById("passwordError").textContent = 
+                  "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character.";
+              return;
+          }
+
+          // Confirm Password Validation
+          if (password !== confirmPassword) {
+              document.getElementById("confirmPasswordError").textContent = "Passwords do not match!";
+              return;
+          }
+
+          // Prepare data
+          const requestData = { username, email, password };
+
           try {
               const response = await fetch("http://localhost:8080/api/register", {
                   method: "POST",
-                  headers: {
-                      "Content-Type": "application/json"
-                  },
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(requestData)
               });
-      
+
               if (response.ok) {
                   alert("Registration successful!");
                   window.location.href = "login.html";
@@ -74,6 +94,13 @@
               alert("Something went wrong!");
           }
       });
-      </script>
+    </script>
+
+    <style>
+      .error-message {
+        color: red;
+        font-size: 12px;
+      }
+    </style>
   </body>
 </html>

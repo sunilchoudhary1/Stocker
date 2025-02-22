@@ -244,39 +244,53 @@
         }
 
         function handleTransaction() {
-            let amount = parseFloat(document.getElementById("amountInput").value);
-            let paymentMethod = document.getElementById("paymentMethod").value;
+    let amount = parseFloat(document.getElementById("amountInput").value);
+    let userId = 1; // Replace this with the actual logged-in user ID
+    let url = transactionType === "add" ? "/api/transactions/add" : "/api/transactions/withdraw";
 
-            if (isNaN(amount) || amount <= 0) {
-                alert("Please enter a valid amount.");
-                return;
-            }
+    if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+    }
 
-            let balanceElement = document.getElementById("accountBalance");
-            let currentBalance = parseFloat(balanceElement.innerText.replace("₹", ""));
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            userId: userId.toString(),
+            amount: amount.toString()
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(`Transaction successful: ₹${data.amount} ${transactionType === "add" ? "added" : "withdrawn"}!`);
+        updateBalance(userId); // Fetch and update balance
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Transaction failed. Please try again.");
+    });
 
-            if (transactionType === "add") {
-                balanceElement.innerText = `₹${(currentBalance + amount).toFixed(2)}`;
-                alert(`₹${amount} added via ${paymentMethod.toUpperCase()}! ✅`);
-            } else if (transactionType === "withdraw") {
-                if (amount > currentBalance) {
-                    alert("Insufficient balance!");
-                    return;
-                }
-                balanceElement.innerText = `₹${(currentBalance - amount).toFixed(2)}`;
-                alert(`₹${amount} withdrawn via ${paymentMethod.toUpperCase()}! ✅`);
-            }
+    closeModal();
+}
 
-            closeModal();
-        }
+// Fetch and update account balance
+function updateBalance(userId) {
+    fetch(`/api/transactions/balance/${userId}`)
+        .then(response => response.json())
+        .then(balance => {
+            document.getElementById("accountBalance").innerText = `₹${balance}`;
+        })
+        .catch(error => console.error("Error fetching balance:", error));
+}
 
-        // Close modal if user clicks outside it
-        window.onclick = function(event) {
-            let modal = document.getElementById("transactionModal");
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
+// Fetch balance on page load
+document.addEventListener("DOMContentLoaded", function () {
+    let userId = 1; // Replace with actual user ID
+    updateBalance(userId);
+});
     </script>
 
 </body>
