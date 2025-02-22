@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Market News - Stock Sphere</title>
+    <link rel="stylesheet" href="css/my-portfolio.css" />
+    <style>
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .news-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .news-item:hover {
+            transform: scale(1.02);
+        }
+        .news-item a {
+            color: blue;
+            font-weight: bold;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">📊 Stock Sphere</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="marketinsights.html">Market Insights</a></li>
+            <li><a href="myportfolio.html">My Portfolio</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+            <li><a href="account-settings.html">Account Settings</a></li>
+            <li><a href="logout.html" class="logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main class="news">
+            <h1>📰 Latest Stock Market News</h1>
+            <input type="text" id="search" class="search-bar" placeholder="Search news..." onkeyup="filterNews()" />
+            <div id="loading" class="loading">Loading news...</div>
+            <div id="news" class="news-container"></div>
+        </main>
+    </div>
+
+    <script>
+        async function fetchNews() {
+            const apiKey = '51d1753a06cc4338a34c79ecca0eb940';
+            const url = `https://newsapi.org/v2/everything?q=stock&apiKey=${apiKey}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const newsContainer = document.getElementById("news");
+                const loadingText = document.getElementById("loading");
+                loadingText.style.display = "none";
+                
+                if (data.articles) {
+                    data.articles.forEach(article => {
+                        const newsItem = document.createElement("div");
+                        newsItem.classList.add("news-item");
+                        newsItem.innerHTML = `
+                            <h3>${article.title}</h3>
+                            <p>${article.description || "No description available."}</p>
+                            <a href="${article.url}" target="_blank">Read More</a>
+                        `;
+                        newsContainer.appendChild(newsItem);
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching news:", error);
+            }
+        }
+
+        function filterNews() {
+            let searchInput = document.getElementById("search").value.toLowerCase();
+            let newsItems = document.querySelectorAll(".news-item");
+            
+            newsItems.forEach(item => {
+                let title = item.querySelector("h3").innerText.toLowerCase();
+                if (title.includes(searchInput)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+
+        fetchNews();
+    </script>
+</body>
+</html>
