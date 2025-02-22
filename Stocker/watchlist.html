@@ -5,123 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watchlist - Stock Sphere</title>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <link rel="stylesheet" href="css/my-portfolio.css">
+    <!-- <link rel="stylesheet" href="css/my-portfolio.css"> -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: white;
-            margin: 0;
-        }
+/* General Styles */
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
 
-        /* Navigation Bar */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            padding: 15px 20px;
-        }
-        .logo {
-            font-size: 1.5em;
-        }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            padding: 0;
-            margin: 0;
-        }
-        .nav-links li {
-            margin: 0 15px;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color:black;
-            font-weight: bold;
-        }
-        .logout {
-            color: red;
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        /* Responsive Layout */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            padding: 20px;
-        }
+.logo {
+    font-size: 1.5em;
+}
 
-        .stock-list {
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
-            border-right: 2px solid white;
-            overflow-y: auto;
-            height: 80vh;
-        }
-        .stock-list ul {
-            list-style: none;
-            padding: 0;
-        }
-        .stock-list li {
-            cursor: pointer;
-            padding: 10px;
-            border-bottom: 1px solid white;
-        }
-        .stock-list li:hover {
-            background-color: #333;
-        }
+.nav-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
 
-        .stock-details {
-            flex: 2;
-            padding: 20px;
-            text-align: center;
-        }
-        .buy-sell {
-            margin-top: 20px;
-        }
-        .btn {
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        .buy { background-color: green; }
-        .sell { background-color: red; }
+.nav-links li {
+    margin: 0 15px;
+}
 
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            .stock-list {
-                max-width: 100%;
-                border-right: none;
-                border-bottom: 2px solid white;
-                height: auto;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                background-color: #1e1e1e;
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-            }
-            .nav-links.active {
-                display: flex;
-            }
-        }
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.logout {
+    color: red;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    height: 90vh;
+    overflow: hidden;
+}
+
+/* Stock List (Scrollable) */
+.stock-list {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    border-right: 2px solid white;
+    overflow-y: auto;
+    height: 100%;
+    background-color: #1e1e1e;
+    padding: 15px;
+}
+
+.stock-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.stock-list li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid white;
+    transition: background 0.3s ease;
+}
+
+.stock-list li:hover {
+    background-color: #333;
+}
+
+/* Stock Details */
+.stock-details {
+    flex: 2;
+    padding: 20px;
+    text-align: center;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* News Section */
+.news-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+    text-align: left;
+}
+
+.news-container h2 {
+    text-align: center;
+}
+
+#news-list {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#news-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: #333;
+}
+
+#news-list li a {
+    text-decoration: none;
+    color: #00bcd4;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .stock-list {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 2px solid white;
+        height: auto;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #1e1e1e;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
     </style>
 </head>
 <body>
@@ -210,43 +258,91 @@
                 <li onclick="loadStock('BSE:TATAPOWER')">Tata Power (TATAPOWER)</li>
             </ul>
         </div>
+        
         <div class="stock-details">
             <h2>Stock Details</h2>
             <div id="tradingview_chart"></div>
-            <div class="buy-sell" id="buy-sell-buttons" style="display: none;">
-                <button class="btn buy">Buy</button>
-                <button class="btn sell">Sell</button>
+
+            <div class="news-container">
+                <h2>Latest News</h2>
+                <ul id="news-list"></ul>
             </div>
+            
         </div>
     </div>
     
     <script>
-        function loadStock(symbol) {
-            document.getElementById("tradingview_chart").innerHTML = "";
-            document.getElementById("buy-sell-buttons").style.display = "block"; // Show buttons
-    
-            new TradingView.widget({
-                "width": "100%",
-                "height": 400,
-                "symbol": symbol,
-                "theme": "dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "#f1f3f6",
-                "hide_side_toolbar": true,
-                "allow_symbol_change": false,
-                "container_id": "tradingview_chart"
-            });
-        }
-    
-        function toggleMenu() {
-            document.querySelector(".nav-links").classList.toggle("active");
-        }
-    
-        // Load the first stock automatically when the page loads
-        window.onload = function () {
+function loadStock(symbol) {
+    document.getElementById("tradingview_chart").innerHTML = "";
+
+    new TradingView.widget({
+        "width": "100%",
+        "height": 400,
+        "symbol": symbol,
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "hide_side_toolbar": true,
+        "allow_symbol_change": false,
+        "container_id": "tradingview_chart"
+    });
+
+    fetchNews(symbol); // Fetch news for selected stock
+}
+
+function fetchNews(stockSymbol) {
+    let stockName = stockSymbol.split(":")[1]; // Extract stock name from symbol
+    let rssUrl = `https://news.google.com/rss/search?q=${stockName}+stock&hl=en-IN&gl=IN&ceid=IN:en`;
+
+    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`)
+    .then(response => response.json())
+    .then(data => {
+        let newsList = document.getElementById("news-list");
+        newsList.innerHTML = ""; // Clear previous news
+
+        data.items.slice(0, 10).forEach(item => { // Get top 5 news
+            let li = document.createElement("li");
+            li.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+            newsList.appendChild(li);
+        });
+    })
+    .catch(error => console.log("Error fetching news:", error));
+}
+
+function fetchStockData(stockSymbol) {
+    let url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${stockSymbol}`;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        let stock = data.quoteResponse.result[0];
+
+        let stockDetails = `
+            <h3>${stock.longName} (${stock.symbol})</h3>
+            <p><strong>Current Price:</strong> ₹${stock.regularMarketPrice}</p>
+            <p><strong>Market Cap:</strong> ₹${(stock.marketCap / 1e9).toFixed(2)}B</p>
+            <p><strong>P/E Ratio:</strong> ${stock.trailingPE ? stock.trailingPE.toFixed(2) : 'N/A'}</p>
+            <p><strong>52-Week High:</strong> ₹${stock.fiftyTwoWeekHigh}</p>
+            <p><strong>52-Week Low:</strong> ₹${stock.fiftyTwoWeekLow}</p>
+        `;
+
+        document.getElementById("stock-info").innerHTML = stockDetails;
+    })
+    .catch(error => console.error("Error fetching stock data:", error));
+}
+
+// Example: Fetch Reliance Industries data
+fetchStockData("RELIANCE.NS");
+
+window.onload = function () {
             loadStock('BSE:RELIANCE'); // Load Reliance stock by default
         };
+
     </script>
 </body>
 </html>
+<!-- 
+        window.onload = function () {
+            loadStock('BSE:RELIANCE'); // Load Reliance stock by default
+        }; -->
