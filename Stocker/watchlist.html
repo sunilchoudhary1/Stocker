@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Trading Live</title>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+        }
+        .container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    height: 80vh; /* Adjust height as needed */
+}
+
+.stock-list {
+    width: 30%;
+    border-right: 1px solid white;
+    padding-right: 20px;
+    overflow-y: auto; /* Enables scrolling */
+    max-height: 80vh; /* Ensures only the list scrolls */
+}
+
+.stock-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stock-list li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid white;
+}
+
+.stock-list li:hover {
+    background-color: #333;
+}
+
+.stock-details {
+    width: 65%;
+    position: relative; /* Ensures it remains fixed */
+}
+        .buy-sell {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .buy { background-color: green; }
+        .sell { background-color: red; }
+    </style>
+</head>
+<body>
+    <h1>Live Stock Trading</h1>
+    <div class="container">
+        <div class="stock-list">
+            <h2>Stocks</h2>
+            <ul>
+                <li onclick="loadStock('BSE:RELIANCE')">Reliance (RELIANCE)</li>
+                <li onclick="loadStock('BSE:TCS')">TCS (TCS)</li>
+                <li onclick="loadStock('BSE:HDFCBANK')">HDFC Bank (HDFCBANK)</li>
+                <li onclick="loadStock('BSE:INFY')">Infosys (INFY)</li>
+                <li onclick="loadStock('BSE:ICICIBANK')">ICICI Bank (ICICIBANK)</li>
+                <li onclick="loadStock('BSE:AXISBANK')">Axis Bank (AXISBANK)</li>
+                <li onclick="loadStock('BSE:KOTAKBANK')">Kotak Bank (KOTAKBANK)</li>
+                <li onclick="loadStock('BSE:SBIN')">State Bank of India (SBIN)</li>
+                <li onclick="loadStock('BSE:BAJFINANCE')">Bajaj Finance (BAJFINANCE)</li>
+                <li onclick="loadStock('BSE:PNB')">Punjab National Bank (PNB)</li>
+                
+                <li onclick="loadStock('BSE:WIPRO')">Wipro (WIPRO)</li>
+                <li onclick="loadStock('BSE:HCLTECH')">HCL Technologies (HCLTECH)</li>
+                <li onclick="loadStock('BSE:TECHM')">Tech Mahindra (TECHM)</li>
+                <li onclick="loadStock('BSE:LTI')">L&T Infotech (LTI)</li>
+                <li onclick="loadStock('BSE:MINDTREE')">Mindtree (MINDTREE)</li>
+                <li onclick="loadStock('BSE:MPHASIS')">Mphasis (MPHASIS)</li>
+                <li onclick="loadStock('BSE:COFORGE')">Coforge (COFORGE)</li>
+                <li onclick="loadStock('BSE:TATACONSUM')">Tata Consumer (TATACONSUM)</li>
+                <li onclick="loadStock('BSE:ITC')">ITC (ITC)</li>
+                <li onclick="loadStock('BSE:HINDUNILVR')">Hindustan Unilever (HINDUNILVR)</li>
+                
+                <li onclick="loadStock('BSE:NESTLEIND')">Nestle India (NESTLEIND)</li>
+                <li onclick="loadStock('BSE:BRITANNIA')">Britannia (BRITANNIA)</li>
+                <li onclick="loadStock('BSE:DABUR')">Dabur (DABUR)</li>
+                <li onclick="loadStock('BSE:GODREJCP')">Godrej Consumer (GODREJCP)</li>
+                <li onclick="loadStock('BSE:MARICO')">Marico (MARICO)</li>
+                <li onclick="loadStock('BSE:COLPAL')">Colgate Palmolive (COLPAL)</li>
+                <li onclick="loadStock('BSE:EMAMILTD')">Emami (EMAMILTD)</li>
+                <li onclick="loadStock('BSE:SUNPHARMA')">Sun Pharma (SUNPHARMA)</li>
+                <li onclick="loadStock('BSE:DRREDDY')">Dr. Reddy’s (DRREDDY)</li>
+                <li onclick="loadStock('BSE:CIPLA')">Cipla (CIPLA)</li>
+                
+                <li onclick="loadStock('BSE:LUPIN')">Lupin (LUPIN)</li>
+                <li onclick="loadStock('BSE:AUROPHARMA')">Aurobindo Pharma (AUROPHARMA)</li>
+                <li onclick="loadStock('BSE:TORNTPHARM')">Torrent Pharma (TORNTPHARM)</li>
+                <li onclick="loadStock('BSE:GLENMARK')">Glenmark (GLENMARK)</li>
+                <li onclick="loadStock('BSE:BIOCON')">Biocon (BIOCON)</li>
+                <li onclick="loadStock('BSE:ABBOTINDIA')">Abbott India (ABBOTINDIA)</li>
+                <li onclick="loadStock('BSE:TATAMOTORS')">Tata Motors (TATAMOTORS)</li>
+                <li onclick="loadStock('BSE:MARUTI')">Maruti Suzuki (MARUTI)</li>
+                <li onclick="loadStock('BSE:BAJAJ-AUTO')">Bajaj Auto (BAJAJ-AUTO)</li>
+                <li onclick="loadStock('BSE:HEROMOTOCO')">Hero MotoCorp (HEROMOTOCO)</li>
+                
+                <li onclick="loadStock('BSE:TVSMOTOR')">TVS Motor (TVSMOTOR)</li>
+                <li onclick="loadStock('BSE:EICHERMOT')">Eicher Motors (EICHERMOT)</li>
+                <li onclick="loadStock('BSE:ASHOKLEY')">Ashok Leyland (ASHOKLEY)</li>
+                <li onclick="loadStock('BSE:MRF')">MRF Tyres (MRF)</li>
+                <li onclick="loadStock('BSE:APOLLOTYRE')">Apollo Tyres (APOLLOTYRE)</li>
+                <li onclick="loadStock('BSE:TATASTEEL')">Tata Steel (TATASTEEL)</li>
+                <li onclick="loadStock('BSE:JSWSTEEL')">JSW Steel (JSWSTEEL)</li>
+                <li onclick="loadStock('BSE:SAIL')">SAIL (SAIL)</li>
+                <li onclick="loadStock('BSE:HINDALCO')">Hindalco (HINDALCO)</li>
+                <li onclick="loadStock('BSE:VEDL')">Vedanta (VEDL)</li>
+                
+                <li onclick="loadStock('BSE:COALINDIA')">Coal India (COALINDIA)</li>
+                <li onclick="loadStock('BSE:JINDALSTEL')">Jindal Steel (JINDALSTEL)</li>
+                <li onclick="loadStock('BSE:NMDC')">NMDC (NMDC)</li>
+                <li onclick="loadStock('BSE:L&T')">Larsen & Toubro (L&T)</li>
+                <li onclick="loadStock('BSE:GMRINFRA')">GMR Infra (GMRINFRA)</li>
+                <li onclick="loadStock('BSE:DLF')">DLF Ltd (DLF)</li>
+                <li onclick="loadStock('BSE:IRCTC')">IRCTC (IRCTC)</li>
+                <li onclick="loadStock('BSE:ADANIPORTS')">Adani Ports (ADANIPORTS)</li>
+                <li onclick="loadStock('BSE:NTPC')">NTPC Ltd (NTPC)</li>
+                <li onclick="loadStock('BSE:TATAPOWER')">Tata Power (TATAPOWER)</li>
+                <!-- Add remaining 60 Indian stocks from major sectors here -->
+            </ul>
+        </div>
+        <div class="stock-details">
+            <h2>Stock Details</h2>
+            <div id="tradingview_chart"></div>
+            <div class="buy-sell">
+                <button class="btn buy">Buy</button>
+                <button class="btn sell">Sell</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function loadStock(symbol) {
+            document.getElementById("tradingview_chart").innerHTML = "";
+            new TradingView.widget({
+                "width": "100%",
+                "height": 400,
+                "symbol": symbol,
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "hide_side_toolbar": true,
+                "allow_symbol_change": false,
+                "container_id": "tradingview_chart"
+            });
+        }
+    </script>
+</body>
+</html>

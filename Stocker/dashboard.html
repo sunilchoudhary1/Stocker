@@ -11,12 +11,12 @@
     <nav class="navbar">
         <div class="logo">📊 Stock Sphere</div>
         <ul class="nav-links">
-            <li><a href="#"><b>Dashboard</b></a></li>
-            <li><a href="#"><b>Market Insights</b></a></li>
-            <li><a href="#"><b>My Portfolio</b></a></li>
-            <li><a href="#"><b>Watchlist</b></a></li>
-            <li><a href="#"><b>Account Settings</b></a></li>
-            <li><a href="#" class="logout"><b>Logout</b> 🚪</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="market-insights.html">Market Insights</a></li>
+            <li><a href="myportfolio.html" class="active">My Portfolio</a></li>
+            <li><a href="watchlist.html">Watchlist</a></li>
+            <li><a href="account-settings.html">Account Settings</a></li>
+            <li><a href="logout.html" class="logout">Logout</a></li>
         </ul>
     </nav>
 
@@ -34,7 +34,7 @@
 
         <!-- Main Dashboard Content -->
         <main class="dashboard">
-            <h1>Welcome back, [User’s Name]! 📈</h1>
+            <h1 id="welcomeMessage">Welcome back, Loading... 📈</h1>
 
             <!-- Key Metrics -->
             <div class="metrics">
@@ -49,5 +49,25 @@
             </div>
         </main>
     </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("http://localhost:8080/api/current", {
+        method: "GET" // ✅ Allows authentication cookies/sessions
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById("welcomeMessage").innerHTML = `Welcome back, ${data.username}! 📈`;
+    })
+    .catch(error => console.error("Error fetching user details:", error));
+});
+
+    </script>
+
 </body>
 </html>
