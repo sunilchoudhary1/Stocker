@@ -1,96 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio - Stock Sphere</title>
-    <link rel="stylesheet" href="css/my-portfolio.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Prediction - Stocker</title>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.5em;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .logout {
+            color: red;
+        }
+        .container {
+            display: flex;
+            height: 90vh;
+            overflow: hidden;
+        }
+        .stock-list {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            border-right: 2px solid white;
+            overflow-y: auto;
+            height: 100%;
+            background-color: #1e1e1e;
+            padding: 15px;
+        }
+        .stock-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .stock-list li {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid white;
+            transition: background 0.3s ease;
+        }
+        .stock-list li:hover {
+            background-color: #333;
+        }
+        .stock-details {
+            flex: 2;
+            padding: 20px;
+            text-align: center;
+            overflow-y: auto;
+            height: 100%;
+        }
+        #stockGraph {
+            margin-top: 20px;
+            display: none;
+        }
+        #loading {
+            font-size: 18px;
+            color: #ddd;
+            display: none;
+        }
+        img {
+            max-width: 90%;
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">📊 Stock Sphere</div>
+        <div class="logo">📊 Stocker</div>
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="marketinsights.html">Market Insights</a></li>
-            <li><a href="myportfolio.html" class="active">My Portfolio</a></li>
+            <li><a href="myportfolio.html">Prediction</a></li>
             <li><a href="watchlist.html">Watchlist</a></li>
             <li><a href="account-settings.html">Account Settings</a></li>
             <li><a href="logout.html" class="logout">Logout</a></li>
         </ul>
     </nav>
-
-    <!-- Main Content -->
     <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h3>Quick Tools</h3>
+        <div class="stock-list">
+            <h2>Stocks</h2>
             <ul>
-                <li><a href="#">Stock Screener</a></li>
-                <li><a href="#">Investment Calculator</a></li>
-                <li><a href="#">Risk Analysis Tool</a></li>
+                <li onclick="loadStock('BSE:RELIANCE')">Reliance (RELIANCE)</li>
+                <li onclick="loadStock('BSE:TCS')">TCS (TCS)</li>
+                <li onclick="loadStock('BSE:HDFCBANK')">HDFC Bank (HDFCBANK)</li>
+                <li onclick="loadStock('BSE:INFY')">Infosys (INFY)</li>
+                <li onclick="loadStock('BSE:ICICIBANK')">ICICI Bank (ICICIBANK)</li>
+                <li onclick="loadStock('BSE:AXISBANK')">Axis Bank (AXISBANK)</li>
+                <li onclick="loadStock('BSE:KOTAKBANK')">Kotak Bank (KOTAKBANK)</li>
+                <li onclick="loadStock('BSE:SBIN')">State Bank of India (SBIN)</li>
+                <li onclick="loadStock('BSE:BAJFINANCE')">Bajaj Finance (BAJFINANCE)</li>
+                <li onclick="loadStock('BSE:PNB')">Punjab National Bank (PNB)</li>
+                
+                <li onclick="loadStock('BSE:WIPRO')">Wipro (WIPRO)</li>
+                <li onclick="loadStock('BSE:HCLTECH')">HCL Technologies (HCLTECH)</li>
+                <li onclick="loadStock('BSE:TECHM')">Tech Mahindra (TECHM)</li>
+                <li onclick="loadStock('BSE:LTI')">L&T Infotech (LTI)</li>
+                <li onclick="loadStock('BSE:MINDTREE')">Mindtree (MINDTREE)</li>
+                <li onclick="loadStock('BSE:MPHASIS')">Mphasis (MPHASIS)</li>
+                <li onclick="loadStock('BSE:COFORGE')">Coforge (COFORGE)</li>
+                <li onclick="loadStock('BSE:TATACONSUM')">Tata Consumer (TATACONSUM)</li>
+                <li onclick="loadStock('BSE:ITC')">ITC (ITC)</li>
+                <li onclick="loadStock('BSE:HINDUNILVR')">Hindustan Unilever (HINDUNILVR)</li>
+                
+                <li onclick="loadStock('BSE:NESTLEIND')">Nestle India (NESTLEIND)</li>
+                <li onclick="loadStock('BSE:BRITANNIA')">Britannia (BRITANNIA)</li>
+                <li onclick="loadStock('BSE:DABUR')">Dabur (DABUR)</li>
+                <li onclick="loadStock('BSE:GODREJCP')">Godrej Consumer (GODREJCP)</li>
+                <li onclick="loadStock('BSE:MARICO')">Marico (MARICO)</li>
+                <li onclick="loadStock('BSE:COLPAL')">Colgate Palmolive (COLPAL)</li>
+                <li onclick="loadStock('BSE:EMAMILTD')">Emami (EMAMILTD)</li>
+                <li onclick="loadStock('BSE:SUNPHARMA')">Sun Pharma (SUNPHARMA)</li>
+                <li onclick="loadStock('BSE:DRREDDY')">Dr. Reddy’s (DRREDDY)</li>
+                <li onclick="loadStock('BSE:CIPLA')">Cipla (CIPLA)</li>
+                
+                <li onclick="loadStock('BSE:LUPIN')">Lupin (LUPIN)</li>
+                <li onclick="loadStock('BSE:AUROPHARMA')">Aurobindo Pharma (AUROPHARMA)</li>
+                <li onclick="loadStock('BSE:TORNTPHARM')">Torrent Pharma (TORNTPHARM)</li>
+                <li onclick="loadStock('BSE:GLENMARK')">Glenmark (GLENMARK)</li>
+                <li onclick="loadStock('BSE:BIOCON')">Biocon (BIOCON)</li>
+                <li onclick="loadStock('BSE:ABBOTINDIA')">Abbott India (ABBOTINDIA)</li>
+                <li onclick="loadStock('BSE:TATAMOTORS')">Tata Motors (TATAMOTORS)</li>
+                <li onclick="loadStock('BSE:MARUTI')">Maruti Suzuki (MARUTI)</li>
+                <li onclick="loadStock('BSE:BAJAJ-AUTO')">Bajaj Auto (BAJAJ-AUTO)</li>
+                <li onclick="loadStock('BSE:HEROMOTOCO')">Hero MotoCorp (HEROMOTOCO)</li>
+                
+                <li onclick="loadStock('BSE:TVSMOTOR')">TVS Motor (TVSMOTOR)</li>
+                <li onclick="loadStock('BSE:EICHERMOT')">Eicher Motors (EICHERMOT)</li>
+                <li onclick="loadStock('BSE:ASHOKLEY')">Ashok Leyland (ASHOKLEY)</li>
+                <li onclick="loadStock('BSE:MRF')">MRF Tyres (MRF)</li>
+                <li onclick="loadStock('BSE:APOLLOTYRE')">Apollo Tyres (APOLLOTYRE)</li>
+                <li onclick="loadStock('BSE:TATASTEEL')">Tata Steel (TATASTEEL)</li>
+                <li onclick="loadStock('BSE:JSWSTEEL')">JSW Steel (JSWSTEEL)</li>
+                <li onclick="loadStock('BSE:SAIL')">SAIL (SAIL)</li>
+                <li onclick="loadStock('BSE:HINDALCO')">Hindalco (HINDALCO)</li>
+                <li onclick="loadStock('BSE:VEDL')">Vedanta (VEDL)</li>
+                
+                <li onclick="loadStock('BSE:COALINDIA')">Coal India (COALINDIA)</li>
+                <li onclick="loadStock('BSE:JINDALSTEL')">Jindal Steel (JINDALSTEL)</li>
+                <li onclick="loadStock('BSE:NMDC')">NMDC (NMDC)</li>
+                <li onclick="loadStock('BSE:L&T')">Larsen & Toubro (L&T)</li>
+                <li onclick="loadStock('BSE:GMRINFRA')">GMR Infra (GMRINFRA)</li>
+                <li onclick="loadStock('BSE:DLF')">DLF Ltd (DLF)</li>
+                <li onclick="loadStock('BSE:IRCTC')">IRCTC (IRCTC)</li>
+                <li onclick="loadStock('BSE:ADANIPORTS')">Adani Ports (ADANIPORTS)</li>
+                <li onclick="loadStock('BSE:NTPC')">NTPC Ltd (NTPC)</li>
+                <li onclick="loadStock('BSE:TATAPOWER')">Tata Power (TATAPOWER)</li>
             </ul>
-        </aside>
-
-        <!-- Portfolio Section -->
-        <main class="portfolio">
-            <h1>📈 My Portfolio</h1>
-
-            <!-- Portfolio Summary Cards -->
-            <div class="summary-cards">
-                <div class="card">
-                    <h2>Total Investment</h2>
-                    <p>$25,000</p>
-                </div>
-                <div class="card">
-                    <h2>Current Value</h2>
-                    <p>$28,500</p>
-                </div>
-                <div class="card">
-                    <h2>Profit/Loss</h2>
-                    <p style="color: green;">+ $3,500</p>
-                </div>
+        </div>
+        <div class="stock-details">
+            <h1>Stock Price Prediction</h1>
+            <p>Select a stock to view its predicted trend:</p>
+            <div id="stockGraph">
+                <h2 id="stockTitle"></h2>
+                <p id="loading">Fetching data...</p>
+                <img id="stockImage" src="" alt="Stock Prediction">
             </div>
-
-            <!-- Portfolio Table -->
-            <section class="portfolio-table">
-                <h2>Stock Holdings</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Stock</th>
-                            <th>Quantity</th>
-                            <th>Buy Price</th>
-                            <th>Current Price</th>
-                            <th>Profit/Loss</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Apple (AAPL)</td>
-                            <td>50</td>
-                            <td>$150</td>
-                            <td>$175</td>
-                            <td style="color: green;">+ $1,250</td>
-                        </tr>
-                        <tr>
-                            <td>Google (GOOGL)</td>
-                            <td>30</td>
-                            <td>$2,500</td>
-                            <td>$2,450</td>
-                            <td style="color: red;">- $1,500</td>
-                        </tr>
-                        <tr>
-                            <td>Amazon (AMZN)</td>
-                            <td>20</td>
-                            <td>$3,000</td>
-                            <td>$3,200</td>
-                            <td style="color: green;">+ $4,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
+        </div>
     </div>
+    <script>
+        function loadStock(stockSymbol) {
+            document.getElementById("stockTitle").innerText = "Loading " + stockSymbol + "...";
+            document.getElementById("stockGraph").style.display = "block";
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("stockImage").style.display = "none";
+
+            fetch(`http://127.0.0.1:5000/predict?symbol=${stockSymbol}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("stockTitle").innerText = "Error fetching data";
+                        document.getElementById("loading").style.display = "none";
+                    } else {
+                        document.getElementById("stockTitle").innerText = "Stock Prediction for " + stockSymbol;
+                        document.getElementById("loading").style.display = "none";
+                        document.getElementById("stockImage").src = data.prediction_chart;
+                        document.getElementById("stockImage").style.display = "block";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("stockTitle").innerText = "Error fetching data";
+                    document.getElementById("loading").style.display = "none";
+                    console.error("Error:", error);
+                });
+        }
+    </script>
 </body>
 </html>
