@@ -93,6 +93,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -101,7 +107,7 @@
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="marketinsights.html">Market Insights</a></li>
-            <li><a href="myportfolio.html">Prediction</a></li>
+            <li><a href="prediction.html">Prediction</a></li>
             <li><a href="watchlist.html">Watchlist</a></li>
             <li><a href="account-settings.html">Account Settings</a></li>
             <li><a href="logout.html" class="logout">Logout</a></li>
@@ -184,36 +190,26 @@
             <div id="stockGraph">
                 <h2 id="stockTitle"></h2>
                 <p id="loading">Fetching data...</p>
-                <img id="stockImage" src="" alt="Stock Prediction">
+                <iframe id="streamlitFrame"></iframe>
             </div>
         </div>
     </div>
     <script>
         function loadStock(stockSymbol) {
-            document.getElementById("stockTitle").innerText = "Loading " + stockSymbol + "...";
+            document.getElementById("stockTitle").innerText = "Stock Prediction for " + stockSymbol;
             document.getElementById("stockGraph").style.display = "block";
             document.getElementById("loading").style.display = "block";
-            document.getElementById("stockImage").style.display = "none";
+            document.getElementById("streamlitFrame").style.display = "none";
 
-            fetch(`http://127.0.0.1:5000/predict?symbol=${stockSymbol}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        document.getElementById("stockTitle").innerText = "Error fetching data";
-                        document.getElementById("loading").style.display = "none";
-                    } else {
-                        document.getElementById("stockTitle").innerText = "Stock Prediction for " + stockSymbol;
-                        document.getElementById("loading").style.display = "none";
-                        document.getElementById("stockImage").src = data.prediction_chart;
-                        document.getElementById("stockImage").style.display = "block";
-                    }
-                })
-                .catch(error => {
-                    document.getElementById("stockTitle").innerText = "Error fetching data";
-                    document.getElementById("loading").style.display = "none";
-                    console.error("Error:", error);
-                });
+            let iframe = document.getElementById("streamlitFrame");
+            iframe.src = `http://localhost:8501/?stock=${stockSymbol}`;
+
+            iframe.onload = function () {
+                document.getElementById("loading").style.display = "none";
+                iframe.style.display = "block";
+            };
         }
     </script>
+    
 </body>
 </html>
